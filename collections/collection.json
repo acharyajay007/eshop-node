@@ -1,0 +1,783 @@
+{
+	"info": {
+		"_postman_id": "929daed2-283a-4708-a0f3-64fead3d4091",
+		"name": "EShop",
+		"description": "A boilerplate for REST API Development with Node.js and Expressjs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "firstName",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "testing",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Test@123",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test@testing.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/auth/register?=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "429e9ea7-d91b-4e5b-aec4-e23f0644ff2f",
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"FRONT_TOKEN\", data.data.token)",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "super.admin@mailinator.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Super@Admin",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Confirm OTP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "mjsuthar@yopmail.com",
+									"type": "text"
+								},
+								{
+									"key": "otp",
+									"value": "6442",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/auth/verify-otp",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"verify-otp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Resend Confirm OTP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "maitraysuthar@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/auth/resend-verify-otp",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"resend-verify-otp"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Category Store",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "{{FRONT_TOKEN}}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZDQwMzc0ODllY2I2ZDUyNjAzZDQ1ZjMiLCJmaXJzdE5hbWUiOiJ0ZXN0IiwibGFzdE5hbWUiOiJ0ZXN0aW5nIiwiZW1haWwiOiJ0ZXN0QHRlc3RpbmcuY29tIiwiaWF0IjoxNTY0NzI1NTMxLCJleHAiOjE1NjQ3MzI3MzF9.YEGMugzT_ijNgAeBYe4O6hZoidkG_hX9x-1QjQKuJYI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Category 1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category List",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "{{FRONT_TOKEN}}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZDQwMzc0ODllY2I2ZDUyNjAzZDQ1ZjMiLCJmaXJzdE5hbWUiOiJ0ZXN0IiwibGFzdE5hbWUiOiJ0ZXN0aW5nIiwiZW1haWwiOiJ0ZXN0QHRlc3RpbmcuY29tIiwiaWF0IjoxNTY0NzQ0NzQ4LCJleHAiOjE1NjQ3NTE5NDh9.gE2DjhWgNmPFyy7K21MEC4bIm3gbbDicdE_eorFIZ0o",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZDQwMzc0ODllY2I2ZDUyNjAzZDQ1ZjMiLCJmaXJzdE5hbWUiOiJ0ZXN0IiwibGFzdE5hbWUiOiJ0ZXN0aW5nIiwiZW1haWwiOiJ0ZXN0QHRlc3RpbmcuY29tIiwiaWF0IjoxNTY0NzQ0NzQ4LCJleHAiOjE1NjQ3NTE5NDh9.gE2DjhWgNmPFyy7K21MEC4bIm3gbbDicdE_eorFIZ0o",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/category/5e9607fb1cdd3665beb03e0d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"category",
+								"5e9607fb1cdd3665beb03e0d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZDQwMzc0ODllY2I2ZDUyNjAzZDQ1ZjMiLCJmaXJzdE5hbWUiOiJ0ZXN0IiwibGFzdE5hbWUiOiJ0ZXN0aW5nIiwiZW1haWwiOiJ0ZXN0QHRlc3RpbmcuY29tIiwiaWF0IjoxNTY0OTkzMDgwLCJleHAiOjE1NjUwMDAyODB9.Lm0-ociCVNxhL7rnzeCO9i1mmJx1bZRQEJoPCNaHkIA",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Category 2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/category/5e960742e6566765450df077",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"category",
+								"5e960742e6566765450df077"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZDQwMzc0ODllY2I2ZDUyNjAzZDQ1ZjMiLCJmaXJzdE5hbWUiOiJ0ZXN0IiwibGFzdE5hbWUiOiJ0ZXN0aW5nIiwiZW1haWwiOiJ0ZXN0QHRlc3RpbmcuY29tIiwiaWF0IjoxNTY1MDAxNzQ3LCJleHAiOjE1NjUwMDg5NDd9.NFq5JjFI4nEU7_1oAt2Zj91q0vRSdd3d5to-T_7aRJ4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/category/5e9607fb1cdd3665beb03e0d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"category",
+								"5e9607fb1cdd3665beb03e0d"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "oauth2",
+				"oauth2": [
+					{
+						"key": "accessToken",
+						"value": "{{FRONT_TOKEN}}",
+						"type": "string"
+					},
+					{
+						"key": "addTokenTo",
+						"value": "header",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "71e52cfa-ee3a-4f95-9d23-added2167599",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "b995ad56-2d83-419b-bfb0-46119d9ab063",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Product Store",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "{{FRONT_TOKEN}}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZDQwMzc0ODllY2I2ZDUyNjAzZDQ1ZjMiLCJmaXJzdE5hbWUiOiJ0ZXN0IiwibGFzdE5hbWUiOiJ0ZXN0aW5nIiwiZW1haWwiOiJ0ZXN0QHRlc3RpbmcuY29tIiwiaWF0IjoxNTY0NzI1NTMxLCJleHAiOjE1NjQ3MzI3MzF9.YEGMugzT_ijNgAeBYe4O6hZoidkG_hX9x-1QjQKuJYI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Samsung Galaxy A9",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Samsung Galaxy A9",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "12000",
+									"type": "text"
+								},
+								{
+									"key": "discount",
+									"value": "1000",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "5e963144f56eb413b23e0f9b",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/home/jay_acharya/Pictures/images.jpeg"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/product/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"product",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "{{FRONT_TOKEN}}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZDQwMzc0ODllY2I2ZDUyNjAzZDQ1ZjMiLCJmaXJzdE5hbWUiOiJ0ZXN0IiwibGFzdE5hbWUiOiJ0ZXN0aW5nIiwiZW1haWwiOiJ0ZXN0QHRlc3RpbmcuY29tIiwiaWF0IjoxNTY0NzQ0NzQ4LCJleHAiOjE1NjQ3NTE5NDh9.gE2DjhWgNmPFyy7K21MEC4bIm3gbbDicdE_eorFIZ0o",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "offset",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "query",
+									"value": "A",
+									"type": "text"
+								},
+								{
+									"key": "min_price",
+									"value": "12000",
+									"type": "text"
+								},
+								{
+									"key": "max_price",
+									"value": "14000",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZDQwMzc0ODllY2I2ZDUyNjAzZDQ1ZjMiLCJmaXJzdE5hbWUiOiJ0ZXN0IiwibGFzdE5hbWUiOiJ0ZXN0aW5nIiwiZW1haWwiOiJ0ZXN0QHRlc3RpbmcuY29tIiwiaWF0IjoxNTY0NzQ0NzQ4LCJleHAiOjE1NjQ3NTE5NDh9.gE2DjhWgNmPFyy7K21MEC4bIm3gbbDicdE_eorFIZ0o",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/product/5e97652b94a055497a928a10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"product",
+								"5e97652b94a055497a928a10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZDQwMzc0ODllY2I2ZDUyNjAzZDQ1ZjMiLCJmaXJzdE5hbWUiOiJ0ZXN0IiwibGFzdE5hbWUiOiJ0ZXN0aW5nIiwiZW1haWwiOiJ0ZXN0QHRlc3RpbmcuY29tIiwiaWF0IjoxNTY0OTkzMDgwLCJleHAiOjE1NjUwMDAyODB9.Lm0-ociCVNxhL7rnzeCO9i1mmJx1bZRQEJoPCNaHkIA",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "testing book 1",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "testing book desc",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "1000",
+									"type": "text"
+								},
+								{
+									"key": "discount",
+									"value": "100",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "5e960742e6566765450df079",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/home/jay_acharya/Pictures/Screenshot_2020-04-03_10-56-38.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/product/5e9753164e2f283ad20c2e7b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"product",
+								"5e9753164e2f283ad20c2e7b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product Detail",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZDQwMzc0ODllY2I2ZDUyNjAzZDQ1ZjMiLCJmaXJzdE5hbWUiOiJ0ZXN0IiwibGFzdE5hbWUiOiJ0ZXN0aW5nIiwiZW1haWwiOiJ0ZXN0QHRlc3RpbmcuY29tIiwiaWF0IjoxNTY1MDAxNzQ3LCJleHAiOjE1NjUwMDg5NDd9.NFq5JjFI4nEU7_1oAt2Zj91q0vRSdd3d5to-T_7aRJ4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/product/5e96256486311479e5aaac70",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"product",
+								"5e96256486311479e5aaac70"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "oauth2",
+				"oauth2": [
+					{
+						"key": "accessToken",
+						"value": "{{FRONT_TOKEN}}",
+						"type": "string"
+					},
+					{
+						"key": "addTokenTo",
+						"value": "header",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "71e52cfa-ee3a-4f95-9d23-added2167599",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "b995ad56-2d83-419b-bfb0-46119d9ab063",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
